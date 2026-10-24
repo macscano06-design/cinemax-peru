@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d19">
+<meta name="description" content="CineMax Perú: descubre películas, series y anime disponibles legalmente.">
+<title>CineMax Perú — Tu cine, tus reglas</title>
+<style>
+:root{--bg:#070c17;--panel:#101a2b;--panel2:#14233a;--text:#f5f7fb;--muted:#a8b5c9;--red:#ff1735;--line:#243752;--cyan:#49d9ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top,#14233a 0,#070c17 48rem);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:20px;padding:14px clamp(14px,4vw,48px);background:#070c17ed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.logo{font-weight:900;font-size:clamp(21px,3vw,30px);letter-spacing:-1px;white-space:nowrap}.logo b{color:var(--red)}.logo small{font-size:10px;display:block;letter-spacing:3px;color:var(--muted);margin-top:-6px}
+nav{display:flex;gap:8px;flex:1;flex-wrap:wrap}button,.navbtn{font:inherit;cursor:pointer;border:1px solid transparent;border-radius:10px;padding:10px 13px;color:var(--text);background:transparent;text-decoration:none}button:hover,.navbtn:hover{border-color:#3a5274;background:var(--panel2)}.active,.primary{background:var(--red);color:white!important}.search{min-width:190px;flex:0 1 290px;padding:11px 14px;border-radius:30px;border:1px solid #304866;background:#101b2d;color:white;font:inherit}
+main{max-width:1440px;margin:auto;padding:20px clamp(14px,3vw,38px) 40px}
+.hero{min-height:330px;display:flex;align-items:end;position:relative;overflow:hidden;border:1px solid #233852;border-radius:20px;padding:clamp(22px,4vw,48px);background:linear-gradient(90deg,#07101df5 0%,#07101dbb 48%,#07101d25 100%),linear-gradient(135deg,#173d59,#3d172b 50%,#080d19);isolation:isolate}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 72% 38%,#e53c5c80 0 10%,transparent 32%),radial-gradient(circle at 65% 65%,#20a8c966 0 8%,transparent 30%);opacity:.95}
+.hero-copy{max-width:590px}.eyebrow{color:#ff7d8d;font-weight:800;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.02;margin:12px 0}.hero p{color:#d2d9e6;max-width:560px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.primary{font-weight:800}.secondary{border-color:#60748f;background:#101b2dcc}
+.notice{margin:16px 0;padding:12px 15px;border:1px solid #4c4050;border-radius:12px;background:#241722;color:#f4dce2;font-size:13px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:24px;margin-top:26px}.section{margin:0 0 30px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}.section h2{font-size:22px;margin:0}.section-head button{color:var(--cyan);padding:6px}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.card{min-width:0;cursor:pointer;background:transparent;border:0;padding:0;text-align:left;color:inherit}.poster{aspect-ratio:2/3;display:flex;align-items:end;justify-content:center;overflow:hidden;border-radius:11px;border:1px solid #334761;padding:12px;text-align:center;font-size:clamp(13px,1.4vw,17px);font-weight:900;letter-spacing:.3px;text-shadow:0 2px 10px #000;background:linear-gradient(155deg,var(--c1),var(--c2));position:relative;isolation:isolate}.poster:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 50% 28%,#ffffff5c,transparent 25%),linear-gradient(0deg,#02050be8,transparent 65%)}.poster span{display:block}.card:hover .poster{outline:2px solid var(--red);transform:translateY(-2px)}.card strong{display:block;margin-top:8px;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card small{color:var(--muted)}
+aside .box{background:linear-gradient(150deg,#101b2d,#0b1220);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}aside h3{margin:0 0 12px}.chips{display:grid;grid-template-columns:1fr 1fr;gap:7px}.chip{background:#0a1424;border:1px solid #293f5a;padding:9px 8px;border-radius:9px;text-align:center;font-size:13px}.rank{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #1c2b40;font-size:13px}.rank:last-child{border:0}.rank b{font-size:20px;color:var(--red)}.rank .mini{width:34px;height:42px;border-radius:5px;display:grid;place-items:center;background:linear-gradient(135deg,#2b728a,#77243d)}
+.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #3b506d;border-radius:12px;grid-column:1/-1}
+footer{border-top:1px solid var(--line);padding:25px clamp(14px,4vw,48px);color:var(--muted);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}footer b{color:var(--text)}.modal{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:18px;background:#02050bdc}.modal.open{display:flex}.dialog{width:min(520px,100%);background:#101b2d;border:1px solid #3a5274;border-radius:18px;padding:24px;position:relative}.dialog h2{margin-top:0}.close{position:absolute;right:12px;top:12px}.dialog p{color:#c4cedd}.tag{display:inline-block;background:#243651;border-radius:30px;padding:5px 10px;color:#c8f5fb;font-size:12px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}aside .box{margin:0}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}header{gap:10px}}
+@media(max-width:600px){header{position:relative}.search{order:3;flex-basis:100%;width:100%}nav{order:2;flex-basis:100%}nav button{padding:8px 10px;font-size:13px}.hero{min-height:300px;padding:23px}.layout{margin-top:20px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.section h2{font-size:19px}aside{grid-template-columns:1fr}.poster{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">▶ Cine<b>Max</b><small>PERÚ</small></div>
+  <nav aria-label="Navegación">
+    <button class="navbtn active" data-filter="Todo">⌂ Inicio</button>
+    <button class="navbtn" data-filter="Película">▣ Películas</button>
+    <button class="navbtn" data-filter="Serie">▣ Series</button>
+    <button class="navbtn" data-filter="Anime">✦ Anime</button>
+  </nav>
+  <input id="search" class="search" type="search" placeholder="⌕ Buscar películas, series o anime..." aria-label="Buscar catálogo">
+</header>
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">TU PRÓXIMA HISTORIA EMPIEZA AQUÍ</span>
+      <h1>Cine para<br><span style="color:var(--red)">sentirlo todo.</span></h1>
+      <p>Descubre películas, series y anime. Explora el catálogo y encuentra dónde ver contenido disponible legalmente.</p>
+      <div class="actions"><button class="primary" id="explore">▶ Explorar catálogo</button><button class="secondary" id="how">＋ Cómo funciona</button></div>
+    </div>
+  </section>
+  <div class="notice">🎬 <b>Versión de demostración:</b> este sitio muestra un catálogo de ejemplo. No incluye películas comerciales ni enlaces de reproducción no autorizados. Puedes añadir vídeos propios, de dominio público o con licencia.</div>
+  <div class="layout">
+    <div>
+      <section class="section" id="catalogSection">
+        <div class="section-head"><h2 id="catalogTitle">🔥 Selecciones para ti</h2><button id="clear">Limpiar búsqueda ×</button></div>
+        <div class="grid" id="catalog"></div>
+      </section>
+    </div>
+    <aside>
+      <div class="box"><h3>👑 Géneros</h3><div class="chips" id="genres">
+        <button class="chip" data-genre="Acción">⚔️ Acción</button><button class="chip" data-genre="Aventura">🌎 Aventura</button><button class="chip" data-genre="Comedia">😄 Comedia</button><button class="chip" data-genre="Drama">🎭 Drama</button><button class="chip" data-genre="Terror">👻 Terror</button><button class="chip" data-genre="Romance">💗 Romance</button><button class="chip" data-genre="Ciencia ficción">🚀 Ciencia ficción</button><button class="chip" data-genre="Fantasía">✨ Fantasía</button>
+      </div></div>
+      <div class="box"><h3>⭐ Populares en la demo</h3><div class="rank"><b>1</b><span class="mini">🚀</span> Cosmos desconocido</div><div class="rank"><b>2</b><span class="mini">🕵️</span> El caso de medianoche</div><div class="rank"><b>3</b><span class="mini">🐉</span> Leyendas del dragón</div><div class="rank"><b>4</b><span class="mini">🌊</span> Más allá del mar</div></div>
+      <div class="box"><h3>📱 CineMax en tu dispositivo</h3><p style="color:var(--muted);font-size:14px">Diseñado para celular, tablet y computadora. Guarda este archivo y ábrelo en tu navegador.</p></div>
+    </aside>
+  </div>
+</main>
+<footer><div><b>▶ CineMax Perú</b><br>Tu cine, tus reglas.</div><div>Catálogo de demostración · Contenido legal y autorizado</div><div>© <span id="year"></span> CineMax Perú</div></footer>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="close" aria-label="Cerrar">✕</button><span class="tag" id="modalType">CATÁLOGO</span><h2 id="modalTitle">Título</h2><p id="modalDesc"></p><p id="modalMeta"></p><button class="primary" id="watch">▶ Ver opciones legales</button><p style="font-size:12px">La reproducción estará disponible cuando agregues una fuente autorizada.</p></div></div>
+<script>
+const items=[
+ {title:"Cosmos desconocido",type:"Película",genre:"Ciencia ficción",emoji:"🌌",c1:"#155e75",c2:"#17113f",desc:"Una misión científica descubre una señal que podría cambiar nuestra visión del universo."},
+ {title:"El caso de medianoche",type:"Serie",genre:"Drama",emoji:"🕵️",c1:"#6b233c",c2:"#111827",desc:"Una investigadora vuelve a su ciudad para resolver un misterio que lleva años oculto."},
+ {title:"Leyendas del dragón",type:"Anime",genre:"Aventura",emoji:"🐉",c1:"#b45309",c2:"#431407",desc:"Un joven viajero emprende una aventura para proteger los relatos de su pueblo."},
+ {title:"Más allá del mar",type:"Película",genre:"Aventura",emoji:"🌊",c1:"#0369a1",c2:"#082f49",desc:"Dos hermanos navegan hacia una isla que no aparece en ningún mapa."},
+ {title:"Risas de barrio",type:"Serie",genre:"Comedia",emoji:"😂",c1:"#ca8a04",c2:"#7c2d12",desc:"Los vecinos de un edificio convierten los pequeños problemas diarios en grandes enredos."},
+ {title:"La casa de los ecos",type:"Película",genre:"Terror",emoji:"🏚️",c1:"#475569",c2:"#111827",desc:"Un grupo de amigos descubre que una casa abandonada guarda sonidos de otros tiempos."},
+ {title:"Jardín de invierno",type:"Película",genre:"Romance",emoji:"🌷",c1:"#be185d",c2:"#4c1d95",desc:"Un encuentro inesperado ayuda a dos personas a comenzar de nuevo."},
+ {title:"La última órbita",type:"Serie",genre:"Ciencia ficción",emoji:"🪐",c1:"#4338ca",c2:"#0f172a",desc:"La tripulación de una estación espacial pierde contacto con la Tierra."},
+ {title:"Guardianes del valle",type:"Anime",genre:"Acción",emoji:"🗡️",c1:"#15803d",c2:"#052e16",desc:"Un equipo de aprendices protege un valle donde la naturaleza tiene poderes misteriosos."},
+ {title:"El mapa secreto",type:"Película",genre:"Fantasía",emoji:"🗺️",c1:"#92400e",c2:"#312e81",desc:"Un mapa antiguo conduce a una biblioteca escondida bajo una ciudad."},
+ {title:"Pequeños gigantes",type:"Serie",genre:"Comedia",emoji:"🏀",c1:"#ea580c",c2:"#7f1d1d",desc:"Un equipo juvenil aprende a jugar en conjunto dentro y fuera de la cancha."},
+ {title:"Niebla en el faro",type:"Película",genre:"Terror",emoji:"🌫️",c1:"#334155",c2:"#020617",desc:"La persona encargada de un faro comienza a recibir señales durante noches sin barcos."}
+];
+let currentType="Todo",currentGenre="",query="";
+const catalog=document.getElementById("catalog");
+function render(){
+ const filtered=items.filter(x=>(currentType==="Todo"||x.type===currentType)&&(!currentGenre||x.genre===currentGenre)&&(`${x.title} ${x.type} ${x.genre} ${x.desc}`.toLowerCase().includes(query.toLowerCase())));
+ document.getElementById("catalogTitle").textContent=currentGenre?`🎭 ${currentGenre}`:currentType==="Todo"?"🔥 Selecciones para ti":`🎬 ${currentType}s`;
+ catalog.innerHTML="";
+ if(!filtered.length){catalog.innerHTML='<div class="empty">No encontramos resultados. Prueba otra búsqueda o categoría.</div>';return}
+ filtered.forEach(x=>{
+   const card=document.createElement("button");card.className="card";card.innerHTML=`<div class="poster" style="--c1:${x.c1};--c2:${x.c2}"><span>${x.emoji}<br>${x.title}</span></div><strong>${x.title}</strong><small>${x.type} · ${x.genre}</small>`;
+   card.addEventListener("click",()=>openItem(x));catalog.appendChild(card);
+ });
+}
+function openItem(x){document.getElementById("modalTitle").textContent=x.title;document.getElementById("modalType").textContent=x.type.toUpperCase()+" · "+x.genre.toUpperCase();document.getElementById("modalDesc").textContent=x.desc;document.getElementById("modalMeta").textContent="Ficha de ejemplo de CineMax Perú.";document.getElementById("watch").textContent="▶ Ver opciones legales";document.getElementById("modal").classList.add("open")}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{currentType=b.dataset.filter;currentGenre="";document.querySelectorAll("[data-filter]").forEach(z=>z.classList.toggle("active",z===b));render();document.getElementById("catalogSection").scrollIntoView({behavior:"smooth"})}));
+document.querySelectorAll("[data-genre]").forEach(b=>b.addEventListener("click",()=>{currentGenre=currentGenre===b.dataset.genre?"":b.dataset.genre;currentType="Todo";document.querySelectorAll("[data-filter]").forEach(z=>z.classList.toggle("active",z.dataset.filter==="Todo"));render();document.getElementById("catalogSection").scrollIntoView({behavior:"smooth"})}));
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;render()});
+document.getElementById("clear").addEventListener("click",()=>{query="";currentGenre="";currentType="Todo";document.getElementById("search").value="";document.querySelectorAll("[data-filter]").forEach(z=>z.classList.toggle("active",z.dataset.filter==="Todo"));render()});
+document.getElementById("explore").addEventListener("click",()=>document.getElementById("catalogSection").scrollIntoView({behavior:"smooth"}));
+document.getElementById("how").addEventListener("click",()=>{document.getElementById("modalTitle").textContent="Bienvenido a CineMax Perú";document.getElementById("modalType").textContent="CÓMO FUNCIONA";document.getElementById("modalDesc").textContent="Explora el catálogo, filtra por tipo o género y usa el buscador. Esta versión es una plantilla funcional con fichas de ejemplo; aún no aloja ni reproduce películas.";document.getElementById("modalMeta").textContent="Para añadir reproducción, usa archivos propios o fuentes con permiso explícito.";document.getElementById("watch").textContent="Entendido";document.getElementById("modal").classList.add("open")});
+document.getElementById("close").addEventListener("click",()=>document.getElementById("modal").classList.remove("open"));
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")e.currentTarget.classList.remove("open")});
+document.getElementById("watch").addEventListener("click",()=>{document.getElementById("modal").classList.remove("open")});
+document.getElementById("year").textContent=new Date().getFullYear();render();
+</script>
+</body>
+</html>
